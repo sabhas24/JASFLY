@@ -1,11 +1,10 @@
 import "dotenv/config"
-import express from "express"; // importamos express
-
+import express from "express";
 import sequelize from "./SRC/db/connect.js";
+import "./SRC/models/Relaciones.js";
 
 
-
-const app = express(); // creamos la aplicacion
+const app = express();
 
 const PORT = process.env.PORT
 
