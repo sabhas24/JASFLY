@@ -1,0 +1,201 @@
+.custom-header {
+  background-color: #0055a4;
+  color: white;
+  padding: 5px 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  ion-back-button {
+    --color: white;
+  }
+
+  .logo-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    .logo-img {
+      height: 30px;
+    }
+
+    .company-name {
+      font-weight: bold;
+      font-size: 1.1rem;
+    }
+  }
+
+  .menu-btn {
+    --padding-start: 0;
+    --padding-end: 0;
+    margin: 0;
+
+    .hamburger {
+      width: 20px;
+      height: 2px;
+      background-color: white;
+      position: relative;
+      &::before, &::after {
+        content: '';
+        position: absolute;
+        width: 20px;
+        height: 2px;
+        background-color: white;
+      }
+      &::before { top: -6px; }
+      &::after { bottom: -6px; }
+    }
+  }
+}
+
+.page-title {
+  text-align: center;
+  color: #0055a4;
+  font-weight: bold;
+  font-size: 1.1rem;
+  padding: 15px 0;
+  border-bottom: 1px solid #e0e0e0;
+  margin-bottom: 20px;
+}
+
+.form-container, .summary-container {
+  padding: 0 20px;
+}
+
+.custom-input-item {
+  --padding-start: 0;
+  --inner-padding-end: 0;
+  margin-bottom: 15px;
+
+  ion-label {
+    color: #333;
+    font-weight: 500;
+    margin-bottom: 8px !important;
+  }
+
+  ion-select {
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    --placeholder-color: #999;
+    --placeholder-opacity: 1;
+  }
+}
+
+.activity-btn {
+  --border-radius: 5px;
+  font-weight: bold;
+  height: 50px;
+  margin-bottom: 10px;
+  font-size: 1rem;
+
+  &.start-btn {
+    --background: #4caf50;
+  }
+
+  &.end-btn {
+    --background: #d32f2f;
+  }
+}
+
+.grid-inputs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin: 20px 0;
+
+  .input-group {
+    flex: 1 1 calc(50% - 15px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+
+    label {
+      font-size: 0.9rem;
+      color: #333;
+      white-space: nowrap;
+    }
+
+    ion-input {
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      --padding-start: 10px;
+      text-align: right;
+      max-width: 80px;
+    }
+  }
+}
+
+.save-btn {
+  --background: #0055a4;
+  --border-radius: 5px;
+  font-weight: bold;
+  height: 45px;
+  margin-top: 20px;
+}
+
+.footer-link {
+  text-align: center;
+  margin: 20px 0;
+  a {
+    color: #0055a4;
+    text-decoration: none;
+    font-size: 0.9rem;
+  }
+}
+
+// SUMMARY STYLES
+.summary-container {
+  .summary-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0;
+    font-size: 1rem;
+
+    .label {
+      color: #333;
+    }
+
+    .value {
+      font-weight: bold;
+      color: #000;
+
+      &.accent {
+        color: #4caf50;
+      }
+    }
+
+    &.highlight {
+      font-size: 1.1rem;
+    }
+  }
+
+  .divider {
+    border: 0;
+    border-top: 1px solid #eee;
+    margin: 5px 0;
+  }
+
+  .summary-actions {
+    display: flex;
+    gap: 15px;
+    margin-top: 30px;
+
+    ion-button {
+      flex: 1;
+      --border-radius: 5px;
+      font-weight: bold;
+      height: 45px;
+    }
+
+    .edit-btn {
+      --background: #7a7a7a;
+    }
+
+    .confirm-btn {
+      --background: #4caf50;
+    }
+  }
+}

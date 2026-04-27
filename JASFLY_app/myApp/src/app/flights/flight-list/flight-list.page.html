@@ -1,0 +1,33 @@
+<ion-header [translucent]="true">
+  <div class="custom-header">
+    <div class="logo-container">
+      <ion-icon name="airplane" class="logo-icon"></ion-icon>
+      <span class="company-name">JASFLY S.A.</span>
+    </div>
+    <ion-button fill="clear" class="menu-btn">
+      <div class="hamburger"></div>
+    </ion-button>
+  </div>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="page-title">Historial de Vuelos</div>
+
+  <ion-list lines="none">
+    <ion-item *ngFor="let flight of flights" class="flight-item" [routerLink]="['/flight-form', flight.id]">
+      <ion-label>
+        <div class="flight-row">
+          <span class="flight-date">{{ flight.fecha | date:'dd/MM/yyyy' }}</span>
+          <span class="flight-heli">{{ getHelicopterName(flight.aircraftId) }}</span>
+        </div>
+        <div class="flight-pilot">{{ getPilotName(flight.pilotId) }}</div>
+      </ion-label>
+      <ion-icon name="chevron-forward-outline" slot="end" class="arrow-icon"></ion-icon>
+    </ion-item>
+  </ion-list>
+
+  <div class="bottom-actions">
+    <ion-button (click)="newRegister()" class="action-btn register-btn">NUEVO REGISTRO</ion-button>
+    <ion-button (click)="synchronize()" class="action-btn sync-btn">SINCRONIZAR</ion-button>
+  </div>
+</ion-content>

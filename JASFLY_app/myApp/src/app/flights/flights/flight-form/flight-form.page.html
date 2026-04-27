@@ -1,0 +1,131 @@
+<ion-header [translucent]="true">
+  <div class="custom-header">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/flight-list" text="" icon="chevron-back-outline"></ion-back-button>
+    </ion-buttons>
+    <div class="logo-container">
+      <ion-icon name="airplane" class="logo-icon"></ion-icon>
+      <span class="company-name">JASFLY S.A.</span>
+    </div>
+    <ion-button fill="clear" class="menu-btn">
+      <div class="hamburger"></div>
+    </ion-button>
+  </div>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <!-- MODO REGISTRO / EDICIÓN -->
+  <div *ngIf="mode === 'new' || mode === 'edit'">
+    <div class="page-title">{{ mode === 'new' ? 'Nuevo Registro de Vuelo' : 'Editar Registro de Vuelo' }}</div>
+
+    <div class="form-container">
+      <ion-item lines="none" class="custom-input-item">
+        <ion-label position="stacked">Helicóptero:</ion-label>
+        <ion-select [(ngModel)]="flight.aircraftId" interface="popover" placeholder="Seleccione helicóptero">
+          <ion-select-option *ngFor="let heli of helicopters" [value]="heli.id">Helicóptero {{ heli.id }}</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item lines="none" class="custom-input-item">
+        <ion-label position="stacked">Piloto:</ion-label>
+        <ion-select [(ngModel)]="flight.pilotId" interface="popover" placeholder="Seleccione piloto">
+          <ion-select-option *ngFor="let pilot of pilots" [value]="pilot.id">Cpt. {{ pilot.nombre }} {{ pilot.apellido }}</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-button (click)="iniciarActividad()" class="activity-btn start-btn" expand="block">
+        INICIAR ACTIVIDAD
+      </ion-button>
+
+      <ion-button (click)="finalizarActividad()" class="activity-btn end-btn" expand="block">
+        FINALIZAR ACTIVIDAD
+      </ion-button>
+
+      <div class="grid-inputs">
+        <div class="input-group">
+          <label>Odómetro Inicial:</label>
+          <ion-input type="number" [(ngModel)]="flight.odometroInicio"></ion-input>
+        </div>
+        <div class="input-group">
+          <label>Odómetro Final:</label>
+          <ion-input type="number" [(ngModel)]="flight.odometroFin"></ion-input>
+        </div>
+        <div class="input-group">
+          <label>Tiros de Agua:</label>
+          <ion-input type="number" [(ngModel)]="flight.tirosDeAgua"></ion-input>
+        </div>
+        <div class="input-group">
+          <label>Puestas en Marcha:</label>
+          <ion-input type="number" [(ngModel)]="flight.puestaEnMarcha"></ion-input>
+        </div>
+      </div>
+
+      <ion-button (click)="guardar()" class="save-btn" expand="block">
+        GUARDAR
+      </ion-button>
+
+      <div class="footer-link">
+        <a routerLink="/flight-list">Ver Historial del Día ></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODO RESUMEN -->
+  <div *ngIf="mode === 'summary'">
+    <div class="page-title">Resumen del Vuelo</div>
+
+    <div class="summary-container">
+      <div class="summary-row">
+        <span class="label">Fecha:</span>
+        <span class="value">{{ flight.fecha | date:'dd/MM/yyyy' }}</span>
+      </div>
+      <div class="summary-row">
+        <span class="label">Piloto:</span>
+        <span class="value">{{ getPilotName(flight.pilotId) }}</span>
+      </div>
+
+      <hr class="divider">
+
+      <div class="summary-row">
+        <span class="label">Hora Inicio:</span>
+        <span class="value">{{ flight.horaInicio || '--:--' }}</span>
+      </div>
+      <div class="summary-row">
+        <span class="label">Hora Fin:</span>
+        <span class="value">{{ flight.horaFin || '--:--' }}</span>
+      </div>
+
+      <hr class="divider">
+
+      <div class="summary-row">
+        <span class="label">Odómetro Inicial:</span>
+        <span class="value">{{ flight.odometroInicio }}</span>
+      </div>
+      <div class="summary-row">
+        <span class="label">Odómetro Final:</span>
+        <span class="value">{{ flight.odometroFin }}</span>
+      </div>
+
+      <hr class="divider">
+
+      <div class="summary-row highlight">
+        <span class="label">Horas de Vuelo:</span>
+        <span class="value accent">{{ calculateHours() }} Horas</span>
+      </div>
+
+      <div class="summary-row">
+        <span class="label">Tiros de Agua:</span>
+        <span class="value">{{ flight.tirosDeAgua }}</span>
+      </div>
+      <div class="summary-row">
+        <span class="label">Puestas en Marcha:</span>
+        <span class="value">{{ flight.puestaEnMarcha }}</span>
+      </div>
+
+      <div class="summary-actions">
+        <ion-button (click)="edit()" class="edit-btn">EDITAR</ion-button>
+        <ion-button (click)="confirmar()" class="confirm-btn">CONFIRMAR</ion-button>
+      </div>
+    </div>
+  </div>
+</ion-content>

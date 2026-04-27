@@ -1,0 +1,115 @@
+.custom-header {
+  background-color: #0055a4;
+  color: white;
+  padding: 10px 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .logo-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    .logo-img {
+      height: 35px;
+    }
+
+    .company-name {
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+  }
+
+  .menu-btn {
+    --padding-start: 0;
+    --padding-end: 0;
+    margin: 0;
+
+    .hamburger {
+      width: 25px;
+      height: 3px;
+      background-color: white;
+      position: relative;
+      &::before, &::after {
+        content: '';
+        position: absolute;
+        width: 25px;
+        height: 3px;
+        background-color: white;
+      }
+      &::before { top: -8px; }
+      &::after { bottom: -8px; }
+    }
+  }
+}
+
+.page-title {
+  text-align: center;
+  color: #0055a4;
+  font-weight: bold;
+  font-size: 1.1rem;
+  padding: 15px 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.flight-item {
+  --background: white;
+  --padding-start: 15px;
+  --padding-end: 15px;
+  margin: 10px 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  border: 1px solid #e0e0e0;
+
+  .flight-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+
+    .flight-date {
+      font-weight: 500;
+      color: #333;
+    }
+
+    .flight-heli {
+      font-weight: bold;
+      color: #333;
+    }
+  }
+
+  .flight-pilot {
+    font-size: 0.9rem;
+    color: #666;
+  }
+
+  .arrow-icon {
+    color: #999;
+  }
+}
+
+.bottom-actions {
+  position: absolute;
+  bottom: 20px;
+  left: 15px;
+  right: 15px;
+  display: flex;
+  gap: 15px;
+
+  .action-btn {
+    flex: 1;
+    --border-radius: 5px;
+    font-weight: bold;
+    height: 45px;
+  }
+
+  .register-btn {
+    --background: #0055a4;
+    --color: white;
+  }
+
+  .sync-btn {
+    --background: #7a7a7a;
+    --color: white;
+  }
+}
