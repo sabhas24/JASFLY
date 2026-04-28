@@ -1,4 +1,4 @@
-import Helicoptero from "../models/Helicoptero.js";
+import { Helicoptero, Vuelo } from "../models/index.js";
 
 export const crearHelicoptero = async (req, res) => {
     try {
@@ -12,7 +12,9 @@ export const crearHelicoptero = async (req, res) => {
 }
 export const obtenerHelicopteros = async (req, res) => {
     try {
-        const helicopteros = await Helicoptero.findAll();
+        const helicopteros = await Helicoptero.findAll({
+            include: [Vuelo]
+        });
         res.status(200).json(helicopteros)
 
     } catch (error) {

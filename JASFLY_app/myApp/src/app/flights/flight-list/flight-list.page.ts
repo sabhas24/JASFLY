@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonList, IonItem, IonLabel, IonButton, IonIcon, IonCard, IonCardContent } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonList, IonItem, IonLabel, IonButton, IonIcon } from '@ionic/angular/standalone';
 import { Router, RouterModule } from '@angular/router';
 import { FlightService } from '../flight.service';
 import { Flight } from '../../interfaces/flight';
@@ -16,8 +16,8 @@ import { chevronForwardOutline, syncOutline, addOutline, airplane } from 'ionico
   styleUrls: ['./flight-list.page.scss'],
   standalone: true,
   imports: [
-    IonContent, IonHeader, IonTitle, IonToolbar, IonList, IonItem, IonLabel, 
-    IonButton, IonIcon, IonCard, IonCardContent, CommonModule, FormsModule, RouterModule
+    IonContent, IonHeader, IonList, IonItem, IonLabel, 
+    IonButton, IonIcon, CommonModule, FormsModule, RouterModule
   ]
 })
 export class FlightListPage implements OnInit {
@@ -51,9 +51,15 @@ export class FlightListPage implements OnInit {
   }
 
   loadFlights() {
+    const currentPilotId = this.flightService.loggedPilotID();
+
     this.flightService.getFlights().subscribe({
       next: (data) => {
-        this.flights = data;
+        if (currentPilotId) {
+          this.flights = data.filter(flight => flight.pilotoId === currentPilotId);
+        } else {
+          this.flights = data;
+        }
       },
       error: (err) => console.error('Error loading flights', err)
     });
@@ -61,12 +67,14 @@ export class FlightListPage implements OnInit {
 
   getHelicopterName(id: number): string {
     const heli = this.helicopters.find(h => h.id === id);
-    return heli ? `Helicóptero ${heli.id}` : `Heli ${id}`;
+    return heli && heli.modelo ? heli.modelo : `Heli ${id}`;
   }
 
   getPilotName(id: number): string {
     const pilot = this.pilots.find(p => p.id === id);
-    return pilot ? `Cpt. ${pilot.nombre.substring(0, 1)}. ${pilot.apellido}` : `Piloto ${id}`;
+    if (!pilot) return `Piloto ${id}`;
+    const name = pilot.Nombre || pilot.nombre || '';
+    return `Cpt. ${name.substring(0, 1)}. ${pilot.apellido}`;
   }
 
   newRegister() {

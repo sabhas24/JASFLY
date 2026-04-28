@@ -1,4 +1,4 @@
-import Vuelo from "../models/Vuelo.js";
+import { Vuelo, Piloto, Helicoptero } from "../models/index.js";
 
 export const crearVuelo = async (req, res) => {
     try {
@@ -12,7 +12,9 @@ export const crearVuelo = async (req, res) => {
 }
 export const obtenerVuelos = async (req, res) => {
     try {
-        const vuelos = await Vuelo.findAll();
+        const vuelos = await Vuelo.findAll({
+            include: [Piloto, Helicoptero]
+        });
         res.status(200).json(vuelos)
 
     } catch (error) {
@@ -24,7 +26,9 @@ export const obtenerVuelos = async (req, res) => {
 export const obtenerVueloID = async (req, res) => {
     try {
         const id = req.params.id;
-        const vuelo = Vuelo.findByPk(id);
+        const vuelo = await Vuelo.findByPk(id, {
+            include: [Piloto, Helicoptero]
+        });
         if (!vuelo) {
             return res.status(404).json({
                 menssage: "Vuelo no encontrado"

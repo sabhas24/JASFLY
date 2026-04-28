@@ -1,7 +1,10 @@
+// ==========================================
+// Header
+// ==========================================
 .custom-header {
-  background-color: #0055a4;
+  background: linear-gradient(135deg, #003366 0%, #0055a4 100%);
   color: white;
-  padding: 5px 15px;
+  padding: 8px 16px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -15,13 +18,16 @@
     align-items: center;
     gap: 10px;
 
-    .logo-img {
-      height: 30px;
+    .logo-icon {
+      width: 3rem;
+      height: 3rem;
+      filter: brightness(0) invert(1);
     }
 
     .company-name {
-      font-weight: bold;
+      font-weight: 700;
       font-size: 1.1rem;
+      letter-spacing: 0.5px;
     }
   }
 
@@ -35,167 +41,225 @@
       height: 2px;
       background-color: white;
       position: relative;
-      &::before, &::after {
+
+      &::before,
+      &::after {
         content: '';
         position: absolute;
         width: 20px;
         height: 2px;
         background-color: white;
       }
-      &::before { top: -6px; }
-      &::after { bottom: -6px; }
+
+      &::before {
+        top: -6px;
+      }
+
+      &::after {
+        bottom: -6px;
+      }
     }
   }
 }
 
+// ==========================================
+// Page Title
+// ==========================================
 .page-title {
   text-align: center;
   color: #0055a4;
-  font-weight: bold;
+  font-weight: 700;
   font-size: 1.1rem;
-  padding: 15px 0;
-  border-bottom: 1px solid #e0e0e0;
-  margin-bottom: 20px;
+  padding: 16px 0;
+  border-bottom: 2px solid #e8edf2;
+  background: #f8fafc;
 }
 
-.form-container, .summary-container {
-  padding: 0 20px;
+// ==========================================
+// Form Layout
+// ==========================================
+.form-container,
+.summary-container {
+  padding: 16px 20px 30px;
 }
 
-.custom-input-item {
-  --padding-start: 0;
-  --inner-padding-end: 0;
-  margin-bottom: 15px;
-
-  ion-label {
-    color: #333;
-    font-weight: 500;
-    margin-bottom: 8px !important;
-  }
-
-  ion-select {
-    width: 100%;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 10px;
-    --placeholder-color: #999;
-    --placeholder-opacity: 1;
-  }
+.form-section {
+  margin-bottom: 22px;
 }
 
-.activity-btn {
-  --border-radius: 5px;
-  font-weight: bold;
-  height: 50px;
-  margin-bottom: 10px;
-  font-size: 1rem;
-
-  &.start-btn {
-    --background: #4caf50;
-  }
-
-  &.end-btn {
-    --background: #d32f2f;
-  }
+.section-label {
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: #8899aa;
+  margin-bottom: 8px;
+  padding-left: 4px;
 }
 
-.grid-inputs {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 15px;
-  margin: 20px 0;
+.field-card {
+  background: white;
+  border-radius: 14px;
+  border: 1px solid #e2e8f0;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
 
-  .input-group {
-    flex: 1 1 calc(50% - 15px);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 10px;
+  ion-item {
+    --background: transparent;
+    --padding-start: 16px;
+    --padding-end: 16px;
+    --min-height: 56px;
+    --border-color: #f0f3f6;
 
-    label {
-      font-size: 0.9rem;
-      color: #333;
-      white-space: nowrap;
-    }
-
+    ion-select,
     ion-input {
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      --padding-start: 10px;
-      text-align: right;
-      max-width: 80px;
+      --placeholder-color: #aab;
+      --placeholder-opacity: 1;
+      font-size: 0.95rem;
     }
   }
 }
 
+// ==========================================
+// Metrics Grid (Odómetros, etc.)
+// ==========================================
+.metrics-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+}
+
+.metric-item {
+  display: flex;
+  flex-direction: column;
+  padding: 14px 16px;
+  border-bottom: 1px solid #f0f3f6;
+  border-right: 1px solid #f0f3f6;
+
+  &:nth-child(2n) {
+    border-right: none;
+  }
+
+  &:nth-last-child(-n+2) {
+    border-bottom: none;
+  }
+}
+
+.metric-label {
+  font-size: 0.75rem;
+  color: #8899aa;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  margin-bottom: 4px;
+}
+
+.metric-input {
+  --padding-start: 0;
+  --padding-end: 0;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #1a2b3c;
+}
+
+// ==========================================
+// Save Button
+// ==========================================
 .save-btn {
-  --background: #0055a4;
-  --border-radius: 5px;
-  font-weight: bold;
-  height: 45px;
-  margin-top: 20px;
+  --background: linear-gradient(135deg, #0055a4 0%, #0077cc 100%);
+  --background-hover: #003d7a;
+  --border-radius: 14px;
+  --box-shadow: 0 4px 15px rgba(0, 85, 164, 0.35);
+  font-weight: 700;
+  height: 52px;
+  margin-top: 10px;
+  font-size: 0.95rem;
+  letter-spacing: 1px;
 }
 
 .footer-link {
   text-align: center;
-  margin: 20px 0;
+  margin: 20px 0 10px;
+
   a {
-    color: #0055a4;
+    color: #6688aa;
     text-decoration: none;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
+    font-weight: 500;
   }
 }
 
-// SUMMARY STYLES
+// ==========================================
+// Summary
+// ==========================================
 .summary-container {
+  padding-bottom: 40px;
+}
+
+.summary-card {
+  background: white;
+  border-radius: 14px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+  margin-bottom: 14px;
+  overflow: hidden;
+
   .summary-row {
     display: flex;
     justify-content: space-between;
-    padding: 12px 0;
-    font-size: 1rem;
+    align-items: center;
+    padding: 14px 18px;
+    border-bottom: 1px solid #f5f7f9;
+
+    &:last-child {
+      border-bottom: none;
+    }
 
     .label {
-      color: #333;
+      color: #6688aa;
+      font-size: 0.9rem;
+      font-weight: 500;
     }
 
     .value {
-      font-weight: bold;
-      color: #000;
+      font-weight: 700;
+      color: #1a2b3c;
+      font-size: 0.95rem;
 
       &.accent {
-        color: #4caf50;
+        color: #2e7d32;
+        font-size: 1.3rem;
       }
     }
-
-    &.highlight {
-      font-size: 1.1rem;
-    }
   }
 
-  .divider {
-    border: 0;
-    border-top: 1px solid #eee;
-    margin: 5px 0;
+  &.highlight-card {
+    background: linear-gradient(135deg, #e8f5e9 0%, #f1f8e9 100%);
+    border-color: #c8e6c9;
+  }
+}
+
+.summary-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+
+  ion-button {
+    flex: 1;
+    --border-radius: 14px;
+    font-weight: 700;
+    height: 50px;
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
   }
 
-  .summary-actions {
-    display: flex;
-    gap: 15px;
-    margin-top: 30px;
+  .edit-btn {
+    --background: #607d8b;
+    --background-hover: #455a64;
+  }
 
-    ion-button {
-      flex: 1;
-      --border-radius: 5px;
-      font-weight: bold;
-      height: 45px;
-    }
-
-    .edit-btn {
-      --background: #7a7a7a;
-    }
-
-    .confirm-btn {
-      --background: #4caf50;
-    }
+  .confirm-btn {
+    --background: linear-gradient(135deg, #2e7d32 0%, #43a047 100%);
+    --background-hover: #1b5e20;
+    --box-shadow: 0 3px 12px rgba(46, 125, 50, 0.3);
   }
 }

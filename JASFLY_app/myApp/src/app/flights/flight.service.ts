@@ -1,17 +1,16 @@
-import { Injectable } from "@angular/core";
+import { Injectable, signal } from "@angular/core";
 import { Flight } from "../interfaces/flight";
 import { Pilot } from "../interfaces/pilot";
 import { Helicopter } from "../interfaces/helicopter";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { Settings } from '../app.setting';
 @Injectable({
   providedIn: 'root'
 })
 export class FlightService {
   private apiUrl = Settings.API_URL;
-
+  loggedPilotID = signal<number | null>(null);
   constructor(private http: HttpClient) {
 
   }

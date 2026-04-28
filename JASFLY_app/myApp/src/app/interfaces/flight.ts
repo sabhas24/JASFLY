@@ -1,7 +1,7 @@
 export interface Flight {
     id: number;
-    pilotId: number;
-    aircraftId: number;
+    pilotoId: number;
+    helicopteroId: number;
     fecha: Date;
     origen: string;
     destino: string;
@@ -11,4 +11,6 @@ export interface Flight {
     odometroFin: number;
     puestaEnMarcha: number;
     tirosDeAgua: number;
+    Piloto?: any;
+    Helicoptero?: any;
 }   

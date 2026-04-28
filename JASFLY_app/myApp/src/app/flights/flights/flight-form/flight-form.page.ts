@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonItem, IonLabel, IonSelect, IonSelectOption, IonInput, IonButton, IonIcon, IonBackButton, IonButtons } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonItem, IonLabel, IonSelect, IonSelectOption, IonInput, IonButton, IonIcon, IonBackButton, IonButtons } from '@ionic/angular/standalone';
 import { FlightService } from '../../flight.service';
 import { Flight } from '../../../interfaces/flight';
 import { Helicopter } from '../../../interfaces/helicopter';
@@ -16,7 +16,7 @@ import { chevronBackOutline, airplane } from 'ionicons/icons';
   styleUrls: ['./flight-form.page.scss'],
   standalone: true,
   imports: [
-    IonContent, IonHeader, IonTitle, IonToolbar, IonItem, IonLabel, 
+    IonContent, IonHeader, IonItem, IonLabel, 
     IonSelect, IonSelectOption, IonInput, IonButton, IonIcon, IonBackButton, IonButtons,
     CommonModule, FormsModule
   ]
@@ -25,8 +25,8 @@ export class FlightFormPage implements OnInit {
   mode: 'new' | 'summary' | 'edit' = 'new';
   flight: Flight = {
     id: 0,
-    pilotId: 0,
-    aircraftId: 0,
+    pilotoId: 0,
+    helicopteroId: 0,
     fecha: new Date(),
     origen: '',
     destino: '',
@@ -51,6 +51,12 @@ export class FlightFormPage implements OnInit {
   }
 
   ngOnInit() {
+    // Asignar automáticamente el piloto logueado
+    const currentPilotId = this.flightService.loggedPilotID();
+    if (currentPilotId) {
+      this.flight.pilotoId = currentPilotId;
+    }
+
     this.loadInitialData();
     this.flightId = Number(this.route.snapshot.paramMap.get('id'));
     if (this.flightId) {
@@ -127,6 +133,6 @@ export class FlightFormPage implements OnInit {
 
   getPilotName(id: number): string {
     const pilot = this.pilots.find(p => p.id === id);
-    return pilot ? `Cpt. ${pilot.nombre} ${pilot.apellido}` : '';
+    return pilot ? `Cpt. ${pilot.Nombre || pilot.nombre} ${pilot.apellido}` : '';
   }
 }

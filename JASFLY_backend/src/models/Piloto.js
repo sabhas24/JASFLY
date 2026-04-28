@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize";
 import sequelize from "../db/connect.js";
 
-const Piloto = sequelize.define(
+export const Piloto = sequelize.define(
     "Piloto", {
     id: {
         type: DataTypes.INTEGER,
@@ -34,8 +34,8 @@ const Piloto = sequelize.define(
         type: DataTypes.INTEGER,
         allowNull: false,
         unique: true,
-    },
-    timetamps: true,
-}
-)
+    }
+}, {
+    timestamps: true,
+});
 export default Piloto;

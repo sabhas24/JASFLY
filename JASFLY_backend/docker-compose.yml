@@ -13,7 +13,7 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
-  # 2. Tu Backend de Express
+  # 2. Backend de Express
   api:
     build: .
     container_name: jasfly_api
@@ -29,6 +29,9 @@ services:
     volumes:
       - .:/app
       - /app/node_modules
+    # Ejecuta el seed y luego inicia la API
+    entrypoint: /bin/sh -c "node seed.js && npm run dev"
 
 volumes:
+
   postgres_data:

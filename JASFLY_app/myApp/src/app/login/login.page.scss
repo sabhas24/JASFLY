@@ -1,0 +1,84 @@
+// Login Page Styles
+:host {
+  ion-content {
+    --background: linear-gradient(180deg, #001a33 0%, #003366 40%, #004d99 100%);
+  }
+}
+
+.login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 80vh;
+  padding: 20px;
+}
+
+.login-logo {
+  width: 9rem;
+  height: 9rem;
+
+  filter: brightness(0) invert(1); // Convierte cualquier SVG negro a blanco
+}
+
+.login-title {
+  color: white;
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin: 0 0 5px 0;
+  letter-spacing: 2px;
+}
+
+.login-subtitle {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.95rem;
+  margin: 0 0 35px 0;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 340px;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  padding: 25px 20px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+
+  .select-label {
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 0.85rem;
+    font-weight: 500;
+    margin-bottom: 10px;
+    display: block;
+  }
+
+  ion-item {
+    --background: rgba(255, 255, 255, 0.1);
+    --border-color: rgba(255, 255, 255, 0.2);
+    --color: white;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    --min-height: 50px;
+
+    ion-select {
+      color: white;
+      --placeholder-color: rgba(255, 255, 255, 0.5);
+      --placeholder-opacity: 1;
+      width: 100%;
+    }
+  }
+}
+
+.login-btn {
+  --background: #2196f3;
+  --background-hover: #1976d2;
+  --border-radius: 10px;
+  --box-shadow: 0 4px 15px rgba(33, 150, 243, 0.4);
+  font-weight: 700;
+  font-size: 1rem;
+  height: 50px;
+  letter-spacing: 1px;
+  width: 100%;
+  max-width: 340px;
+  margin-top: 5px;
+}

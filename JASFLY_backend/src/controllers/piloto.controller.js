@@ -1,5 +1,5 @@
 
-import Piloto from "../models/Piloto.js";
+import { Piloto, Vuelo } from "../models/index.js";
 
 
 export const crearPiloto = async (req, res) => {
@@ -14,7 +14,9 @@ export const crearPiloto = async (req, res) => {
 }
 export const obtenerPilotos = async (req, res) => {
     try {
-        const pilotos = await Piloto.findAll();
+        const pilotos = await Piloto.findAll({
+            include: [Vuelo]
+        });
         res.status(200).json(pilotos)
 
     } catch (error) {

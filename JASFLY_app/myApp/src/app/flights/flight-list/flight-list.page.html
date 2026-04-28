@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <div class="custom-header">
     <div class="logo-container">
-      <ion-icon name="airplane" class="logo-icon"></ion-icon>
+      <img src="assets/helicopter.svg" alt="JASFLY" class="logo-icon" />
       <span class="company-name">JASFLY S.A.</span>
     </div>
     <ion-button fill="clear" class="menu-btn">
@@ -13,18 +13,26 @@
 <ion-content [fullscreen]="true">
   <div class="page-title">Historial de Vuelos</div>
 
-  <ion-list lines="none">
+  <!-- Lista de vuelos -->
+  <ion-list lines="none" *ngIf="flights.length > 0">
     <ion-item *ngFor="let flight of flights" class="flight-item" [routerLink]="['/flight-form', flight.id]">
       <ion-label>
         <div class="flight-row">
           <span class="flight-date">{{ flight.fecha | date:'dd/MM/yyyy' }}</span>
-          <span class="flight-heli">{{ getHelicopterName(flight.aircraftId) }}</span>
+          <span class="flight-heli">{{ flight.Helicoptero?.modelo || getHelicopterName(flight.helicopteroId) }}</span>
         </div>
-        <div class="flight-pilot">{{ getPilotName(flight.pilotId) }}</div>
+        <div class="flight-pilot">Cpt. {{ (flight.Piloto?.Nombre || flight.Piloto?.nombre || '') | slice:0:1 }}. {{ flight.Piloto?.apellido }}</div>
       </ion-label>
       <ion-icon name="chevron-forward-outline" slot="end" class="arrow-icon"></ion-icon>
     </ion-item>
   </ion-list>
+
+  <!-- Estado vacío -->
+  <div class="empty-state" *ngIf="flights.length === 0">
+    <img src="assets/helicopter.svg" alt="" class="empty-icon" />
+    <h3>Sin vuelos registrados</h3>
+    <p>Presione "Nuevo Registro" para cargar su primer vuelo.</p>
+  </div>
 
   <div class="bottom-actions">
     <ion-button (click)="newRegister()" class="action-btn register-btn">NUEVO REGISTRO</ion-button>
