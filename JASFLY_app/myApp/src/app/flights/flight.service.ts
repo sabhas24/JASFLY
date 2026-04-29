@@ -44,4 +44,5 @@ export class FlightService {
     const url = `${this.apiUrl}/vuelos/${id}`;
     return this.http.put<Flight>(url, flight);
   }
+
 }

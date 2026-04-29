@@ -12,16 +12,19 @@
 
 <ion-content [fullscreen]="true">
   <div class="page-title">Historial de Vuelos</div>
+  <div class="page-subtitle" *ngIf="flights.length > 0"> {{ flights[0]?.Piloto?.Nombre || flights[0]?.Piloto?.nombre }}
+    {{ flights[0]?.Piloto?.apellido }}</div>
 
   <!-- Lista de vuelos -->
   <ion-list lines="none" *ngIf="flights.length > 0">
-    <ion-item *ngFor="let flight of flights" class="flight-item" [routerLink]="['/flight-form', flight.id]">
-      <ion-label>
-        <div class="flight-row">
+    <ion-item *ngFor="let flight of flights" class="flight-item" [routerLink]="['/flight-summary', flight.id]">
+      <ion-label class="flight-card">
+        <div class="flight-header">
+          <span class="flight-heli">Helicóptero N° {{ flight.helicopteroId }}</span>
           <span class="flight-date">{{ flight.fecha | date:'dd/MM/yyyy' }}</span>
-          <span class="flight-heli">{{ flight.Helicoptero?.modelo || getHelicopterName(flight.helicopteroId) }}</span>
         </div>
-        <div class="flight-pilot">Cpt. {{ (flight.Piloto?.Nombre || flight.Piloto?.nombre || '') | slice:0:1 }}. {{ flight.Piloto?.apellido }}</div>
+        <div class="flight-route">{{ flight.origen }} ➔ {{ flight.destino }}</div>
+        <div class="flight-time">{{ flight.horaInicio | slice:0:5 }} - {{ flight.horaFin | slice:0:5 }} hs</div>
       </ion-label>
       <ion-icon name="chevron-forward-outline" slot="end" class="arrow-icon"></ion-icon>
     </ion-item>

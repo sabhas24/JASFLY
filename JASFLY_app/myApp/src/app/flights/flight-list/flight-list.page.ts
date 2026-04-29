@@ -16,14 +16,13 @@ import { chevronForwardOutline, syncOutline, addOutline, airplane } from 'ionico
   styleUrls: ['./flight-list.page.scss'],
   standalone: true,
   imports: [
-    IonContent, IonHeader, IonList, IonItem, IonLabel, 
+    IonContent, IonHeader, IonList, IonItem, IonLabel,
     IonButton, IonIcon, CommonModule, FormsModule, RouterModule
   ]
 })
 export class FlightListPage implements OnInit {
   flights: Flight[] = [];
-  helicopters: Helicopter[] = [];
-  pilots: Pilot[] = [];
+  currentPilotId: number | null = null;
 
   constructor(
     private flightService: FlightService,
@@ -40,41 +39,22 @@ export class FlightListPage implements OnInit {
     this.loadInitialData();
   }
 
-  async loadInitialData() {
-    try {
-      this.helicopters = await this.flightService.getHelicopters().toPromise() || [];
-      this.pilots = await this.flightService.getPilots().toPromise() || [];
-      this.loadFlights();
-    } catch (err) {
-      console.error('Error loading initial data', err);
-    }
+  loadInitialData() {
+    this.currentPilotId = this.flightService.loggedPilotID();
+    this.loadFlights();
   }
 
   loadFlights() {
-    const currentPilotId = this.flightService.loggedPilotID();
-
     this.flightService.getFlights().subscribe({
       next: (data) => {
-        if (currentPilotId) {
-          this.flights = data.filter(flight => flight.pilotoId === currentPilotId);
+        if (this.currentPilotId) {
+          this.flights = data.filter(flight => flight.pilotoId === this.currentPilotId);
         } else {
           this.flights = data;
         }
       },
       error: (err) => console.error('Error loading flights', err)
     });
-  }
-
-  getHelicopterName(id: number): string {
-    const heli = this.helicopters.find(h => h.id === id);
-    return heli && heli.modelo ? heli.modelo : `Heli ${id}`;
-  }
-
-  getPilotName(id: number): string {
-    const pilot = this.pilots.find(p => p.id === id);
-    if (!pilot) return `Piloto ${id}`;
-    const name = pilot.Nombre || pilot.nombre || '';
-    return `Cpt. ${name.substring(0, 1)}. ${pilot.apellido}`;
   }
 
   newRegister() {

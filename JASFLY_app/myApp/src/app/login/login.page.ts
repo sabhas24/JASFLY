@@ -13,7 +13,7 @@ import { airplane } from 'ionicons/icons';
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
   standalone: true,
-  imports: [IonContent, IonButton, IonIcon, IonItem, IonSelect, IonSelectOption, CommonModule, FormsModule]
+  imports: [IonContent, IonButton, IonItem, IonSelect, IonSelectOption, CommonModule, FormsModule]
 })
 export class LoginPage implements OnInit {
   pilots: Pilot[] = [];

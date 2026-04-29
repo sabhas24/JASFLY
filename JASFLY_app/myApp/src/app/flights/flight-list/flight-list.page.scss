@@ -61,10 +61,20 @@
   text-align: center;
   color: #0055a4;
   font-weight: 700;
-  font-size: 1.1rem;
-  padding: 16px 0;
+  font-size: 1.15rem;
+  padding: 16px 0 4px 0;
+  background: #f8fafc;
+}
+
+.page-subtitle {
+  text-align: center;
+  color: #0055a4;
+  font-weight: 700;
+  font-size: 0.9rem;
+  padding: 0 0 16px 0;
   border-bottom: 2px solid #e8edf2;
   background: #f8fafc;
+  margin-bottom: 12px;
 }
 
 // Flight cards
@@ -83,27 +93,44 @@
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
   }
 
-  .flight-row {
+  .flight-card {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 8px 0;
+  }
+
+  .flight-header {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 4px;
-
-    .flight-date {
-      font-weight: 500;
-      color: #333;
-      font-size: 0.95rem;
-    }
+    align-items: center;
 
     .flight-heli {
       font-weight: 700;
       color: #0055a4;
-      font-size: 0.95rem;
+      font-size: 1rem;
+    }
+
+    .flight-date {
+      font-weight: 600;
+      color: #666;
+      font-size: 0.85rem;
+      background: #e8edf2;
+      padding: 4px 10px;
+      border-radius: 6px;
     }
   }
 
-  .flight-pilot {
+  .flight-route {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #222;
+  }
+
+  .flight-time {
     font-size: 0.85rem;
-    color: #666;
+    color: #555;
+    font-weight: 500;
   }
 
   .arrow-icon {

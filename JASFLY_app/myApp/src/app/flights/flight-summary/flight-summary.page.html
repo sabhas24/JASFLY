@@ -1,0 +1,82 @@
+<ion-header [translucent]="true">
+  <div class="custom-header">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/flight-list" text="" icon="chevron-back-outline"></ion-back-button>
+    </ion-buttons>
+    <div class="logo-container">
+      <img src="assets/helicopter.svg" alt="JASFLY" class="logo-icon" />
+      <span class="company-name">JASFLY S.A.</span>
+    </div>
+    <ion-button fill="clear" class="menu-btn">
+      <div class="hamburger"></div>
+    </ion-button>
+  </div>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="page-title">Resumen del Vuelo</div>
+
+  <div class="summary-container" *ngIf="flight">
+    <div class="summary-card">
+      <div class="summary-row">
+        <span class="label">Fecha</span>
+        <span class="value">{{ flight.fecha | date:'dd/MM/yyyy' }}</span>
+      </div>
+      <div class="summary-row">
+        <span class="label">Piloto</span>
+        <span class="value">{{ getPilotName(flight.pilotoId) }}</span>
+      </div>
+      <div class="summary-row">
+        <span class="label">Aeronave</span>
+        <span class="value">{{ getHelicopterModel(flight.helicopteroId) }}</span>
+      </div>
+      <div class="summary-row">
+        <span class="label">Origen</span>
+        <span class="value">{{ flight.origen }}</span>
+      </div>
+      <div class="summary-row">
+        <span class="label">Destino</span>
+        <span class="value">{{ flight.destino }}</span>
+      </div>
+    </div>
+
+    <div class="summary-card">
+      <div class="summary-row">
+        <span class="label">Odómetro Inicial</span>
+        <span class="value">{{ flight.odometroInicio }}</span>
+      </div>
+      <div class="summary-row">
+        <span class="label">Odómetro Final</span>
+        <span class="value">{{ flight.odometroFin }}</span>
+      </div>
+      <div class="summary-row">
+        <span class="label">hora de inicio</span>
+        <span class="value">{{ flight.horaInicio | slice:0:5 }}</span>
+      </div>
+      <div class="summary-row">
+        <span class="label">hora de fin</span>
+        <span class="value">{{ flight.horaFin | slice:0:5 }}</span>
+      </div>
+      <div class="summary-row">
+        <span class="label">Tiros de Agua</span>
+        <span class="value">{{ flight.tirosDeAgua }}</span>
+      </div>
+      <div class="summary-row">
+        <span class="label">Puestas en Marcha</span>
+        <span class="value">{{ flight.puestaEnMarcha }}</span>
+      </div>
+    </div>
+
+    <div class="summary-card highlight-card">
+      <div class="summary-row">
+        <span class="label">Horas de Vuelo</span>
+        <span class="value accent">{{ calculateHours() }} Hrs</span>
+      </div>
+    </div>
+
+    <div class="summary-actions">
+      <ion-button (click)="edit()" class="edit-btn" expand="block">EDITAR</ion-button>
+      <ion-button (click)="confirmar()" class="confirm-btn" expand="block">CONFIRMAR</ion-button>
+    </div>
+  </div>
+</ion-content>

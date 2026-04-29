@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonItem, IonLabel, IonSelect, IonSelectOption, IonInput, IonButton, IonIcon, IonBackButton, IonButtons } from '@ionic/angular/standalone';
-import { FlightService } from '../../flight.service';
-import { Flight } from '../../../interfaces/flight';
-import { Helicopter } from '../../../interfaces/helicopter';
-import { Pilot } from '../../../interfaces/pilot';
-import { ActivatedRoute, Router } from '@angular/router';
+import { FlightService } from '../flight.service';
+import { Flight } from '../../interfaces/flight';
+import { Helicopter } from '../../interfaces/helicopter';
+import { Pilot } from '../../interfaces/pilot';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { addIcons } from 'ionicons';
 import { chevronBackOutline, airplane } from 'ionicons/icons';
 
@@ -16,9 +16,9 @@ import { chevronBackOutline, airplane } from 'ionicons/icons';
   styleUrls: ['./flight-form.page.scss'],
   standalone: true,
   imports: [
-    IonContent, IonHeader, IonItem, IonLabel, 
-    IonSelect, IonSelectOption, IonInput, IonButton, IonIcon, IonBackButton, IonButtons,
-    CommonModule, FormsModule
+    IonContent, IonHeader, IonItem,
+    IonSelect, IonSelectOption, IonInput, IonButton, IonBackButton, IonButtons,
+    CommonModule, FormsModule, RouterLink
   ]
 })
 export class FlightFormPage implements OnInit {
@@ -60,7 +60,7 @@ export class FlightFormPage implements OnInit {
     this.loadInitialData();
     this.flightId = Number(this.route.snapshot.paramMap.get('id'));
     if (this.flightId) {
-      this.mode = 'summary';
+      this.mode = 'edit';
       this.loadFlight(this.flightId);
     }
   }
@@ -94,45 +94,15 @@ export class FlightFormPage implements OnInit {
   guardar() {
     if (this.mode === 'new') {
       this.flightService.saveFlight(this.flight).subscribe({
-        next: () => this.router.navigate(['/flight-list']),
+        next: (res) => this.router.navigate(['/flight-summary', res.id]),
         error: (err) => console.error('Error saving flight', err)
       });
     } else {
       this.flightService.updateFlight(this.flight.id, this.flight).subscribe({
-        next: () => this.mode = 'summary',
+        next: () => this.router.navigate(['/flight-summary', this.flight.id]),
         error: (err) => console.error('Error updating flight', err)
       });
     }
   }
-
-  edit() {
-    this.mode = 'edit';
-  }
-
-  confirmar() {
-    this.router.navigate(['/flight-list']);
-  }
-
-  calculateHours(): string {
-    if (!this.flight.horaInicio || !this.flight.horaFin) return '0.0';
-    const start = this.timeToMinutes(this.flight.horaInicio);
-    const end = this.timeToMinutes(this.flight.horaFin);
-    const diff = end - start;
-    return (diff / 60).toFixed(1);
-  }
-
-  private timeToMinutes(time: string): number {
-    const [hours, minutes] = time.split(':').map(Number);
-    return hours * 60 + minutes;
-  }
-
-  getHelicopterModel(id: number): string {
-    const heli = this.helicopters.find(h => h.id === id);
-    return heli ? `Helicóptero ${heli.id}` : '';
-  }
-
-  getPilotName(id: number): string {
-    const pilot = this.pilots.find(p => p.id === id);
-    return pilot ? `Cpt. ${pilot.Nombre || pilot.nombre} ${pilot.apellido}` : '';
-  }
 }
+

@@ -1,0 +1,152 @@
+// ==========================================
+// Header
+// ==========================================
+.custom-header {
+  background: linear-gradient(135deg, #003366 0%, #0055a4 100%);
+  color: white;
+  padding: 8px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  ion-back-button {
+    --color: white;
+  }
+
+  .logo-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    .logo-icon {
+      width: 3rem;
+      height: 3rem;
+      filter: brightness(0) invert(1);
+    }
+
+    .company-name {
+      font-weight: 700;
+      font-size: 1.1rem;
+      letter-spacing: 0.5px;
+    }
+  }
+
+  .menu-btn {
+    --padding-start: 0;
+    --padding-end: 0;
+    margin: 0;
+
+    .hamburger {
+      width: 20px;
+      height: 2px;
+      background-color: white;
+      position: relative;
+
+      &::before,
+      &::after {
+        content: '';
+        position: absolute;
+        width: 20px;
+        height: 2px;
+        background-color: white;
+      }
+
+      &::before {
+        top: -6px;
+      }
+
+      &::after {
+        bottom: -6px;
+      }
+    }
+  }
+}
+
+// ==========================================
+// Page Title
+// ==========================================
+.page-title {
+  text-align: center;
+  color: #0055a4;
+  font-weight: 700;
+  font-size: 1.1rem;
+  padding: 16px 0;
+  border-bottom: 2px solid #e8edf2;
+  background: #f8fafc;
+}
+
+// ==========================================
+// Summary Layout
+// ==========================================
+.summary-container {
+  padding: 16px 20px 40px;
+}
+
+.summary-card {
+  background: white;
+  border-radius: 14px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+  margin-bottom: 14px;
+  overflow: hidden;
+
+  .summary-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 18px;
+    border-bottom: 1px solid #f5f7f9;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    .label {
+      color: #6688aa;
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    .value {
+      font-weight: 700;
+      color: #1a2b3c;
+      font-size: 0.95rem;
+
+      &.accent {
+        color: #2e7d32;
+        font-size: 1.3rem;
+      }
+    }
+  }
+
+  &.highlight-card {
+    background: linear-gradient(135deg, #e8f5e9 0%, #f1f8e9 100%);
+    border-color: #c8e6c9;
+  }
+}
+
+.summary-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+
+  ion-button {
+    flex: 1;
+    --border-radius: 14px;
+    font-weight: 700;
+    height: 50px;
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
+  }
+
+  .edit-btn {
+    --background: #607d8b;
+    --background-hover: #455a64;
+  }
+
+  .confirm-btn {
+    --background: linear-gradient(135deg, #2e7d32 0%, #43a047 100%);
+    --background-hover: #1b5e20;
+    --box-shadow: 0 3px 12px rgba(46, 125, 50, 0.3);
+  }
+}

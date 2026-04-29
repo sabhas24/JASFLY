@@ -25,8 +25,10 @@
         <span class="section-label">AERONAVE</span>
         <div class="field-card">
           <ion-item lines="none">
-            <ion-select [(ngModel)]="flight.helicopteroId" interface="popover" placeholder="Seleccione helicóptero" label="Helicóptero" labelPlacement="stacked">
-              <ion-select-option *ngFor="let heli of helicopters" [value]="heli.id">{{ heli.modelo }}</ion-select-option>
+            <ion-select [(ngModel)]="flight.helicopteroId" interface="popover" placeholder="Seleccione helicóptero"
+              label="Helicóptero" labelPlacement="stacked">
+              <ion-select-option *ngFor="let heli of helicopters" [value]="heli.id">{{ heli.modelo
+                }}</ion-select-option>
             </ion-select>
           </ion-item>
         </div>
@@ -37,10 +39,12 @@
         <span class="section-label">RUTA</span>
         <div class="field-card">
           <ion-item lines="inset">
-            <ion-input type="text" [(ngModel)]="flight.origen" placeholder="Ej: Base JASFLY" label="Origen" labelPlacement="stacked"></ion-input>
+            <ion-input type="text" [(ngModel)]="flight.origen" placeholder="Ej: Base JASFLY" label="Origen"
+              labelPlacement="stacked"></ion-input>
           </ion-item>
           <ion-item lines="none">
-            <ion-input type="text" [(ngModel)]="flight.destino" placeholder="Ej: Zona Incendio A" label="Destino" labelPlacement="stacked"></ion-input>
+            <ion-input type="text" [(ngModel)]="flight.destino" placeholder="Ej: Zona Incendio A" label="Destino"
+              labelPlacement="stacked"></ion-input>
           </ion-item>
         </div>
       </div>
@@ -50,10 +54,12 @@
         <span class="section-label">HORARIO</span>
         <div class="field-card">
           <ion-item lines="inset">
-            <ion-input type="time" [(ngModel)]="flight.horaInicio" label="Hora de Inicio" labelPlacement="stacked"></ion-input>
+            <ion-input type="time" [(ngModel)]="flight.horaInicio" label="Hora de Inicio"
+              labelPlacement="stacked"></ion-input>
           </ion-item>
           <ion-item lines="none">
-            <ion-input type="time" [(ngModel)]="flight.horaFin" label="Hora de Fin" labelPlacement="stacked"></ion-input>
+            <ion-input type="time" [(ngModel)]="flight.horaFin" label="Hora de Fin"
+              labelPlacement="stacked"></ion-input>
           </ion-item>
         </div>
       </div>
@@ -87,63 +93,6 @@
 
       <div class="footer-link">
         <a routerLink="/flight-list">← Volver al historial</a>
-      </div>
-    </div>
-  </div>
-
-  <!-- MODO RESUMEN -->
-  <div *ngIf="mode === 'summary'">
-    <div class="page-title">Resumen del Vuelo</div>
-
-    <div class="summary-container">
-      <div class="summary-card">
-        <div class="summary-row">
-          <span class="label">Fecha</span>
-          <span class="value">{{ flight.fecha | date:'dd/MM/yyyy' }}</span>
-        </div>
-        <div class="summary-row">
-          <span class="label">Piloto</span>
-          <span class="value">{{ getPilotName(flight.pilotoId) }}</span>
-        </div>
-        <div class="summary-row">
-          <span class="label">Origen</span>
-          <span class="value">{{ flight.origen }}</span>
-        </div>
-        <div class="summary-row">
-          <span class="label">Destino</span>
-          <span class="value">{{ flight.destino }}</span>
-        </div>
-      </div>
-
-      <div class="summary-card">
-        <div class="summary-row">
-          <span class="label">Odómetro Inicial</span>
-          <span class="value">{{ flight.odometroInicio }}</span>
-        </div>
-        <div class="summary-row">
-          <span class="label">Odómetro Final</span>
-          <span class="value">{{ flight.odometroFin }}</span>
-        </div>
-        <div class="summary-row">
-          <span class="label">Tiros de Agua</span>
-          <span class="value">{{ flight.tirosDeAgua }}</span>
-        </div>
-        <div class="summary-row">
-          <span class="label">Puestas en Marcha</span>
-          <span class="value">{{ flight.puestaEnMarcha }}</span>
-        </div>
-      </div>
-
-      <div class="summary-card highlight-card">
-        <div class="summary-row">
-          <span class="label">Horas de Vuelo</span>
-          <span class="value accent">{{ calculateHours() }} Hrs</span>
-        </div>
-      </div>
-
-      <div class="summary-actions">
-        <ion-button (click)="edit()" class="edit-btn" expand="block">EDITAR</ion-button>
-        <ion-button (click)="confirmar()" class="confirm-btn" expand="block">CONFIRMAR</ion-button>
       </div>
     </div>
   </div>
