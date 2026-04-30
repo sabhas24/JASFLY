@@ -2,8 +2,44 @@ import { Vuelo, Piloto, Helicoptero } from "../models/index.js";
 
 export const crearVuelo = async (req, res) => {
     try {
-        const { fecha, hora, duracion, piloto_id, helicoptero_id } = req.body;
-        const vuelo = await Vuelo.create({ fecha, hora, duracion, piloto_id, helicoptero_id });
+        const {
+            fecha,
+            origen,
+            destino,
+            horaInicio,
+            horaFin,
+            odometroInicio,
+            odometroFin,
+            puestaEnMarcha,
+            tirosDeAgua,
+            pilotoId,
+            helicopteroId
+        } = req.body;
+
+        const helicoptero = await Helicoptero.findByPk(helicopteroId);
+        if (!helicoptero) {
+            return res.status(404).json({ message: "Helicóptero no encontrado" });
+        }
+
+
+        helicoptero.odometro = odometroFin;
+        await helicoptero.save();
+
+
+        const vuelo = await Vuelo.create({
+            fecha,
+            origen,
+            destino,
+            horaInicio,
+            horaFin,
+            odometroInicio,
+            odometroFin,
+            puestaEnMarcha,
+            tirosDeAgua,
+            pilotoId,
+            helicopteroId
+        });
+
         res.status(200).json(vuelo);
     } catch (error) {
         console.error("Error al crear el vuelo:", error);
