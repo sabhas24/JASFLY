@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonItem, IonLabel, IonSelect, IonSelectOption, IonInput, IonButton, IonIcon, IonBackButton, IonButtons } from '@ionic/angular/standalone';
@@ -9,6 +9,7 @@ import { Pilot } from '../../interfaces/pilot';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { addIcons } from 'ionicons';
 import { chevronBackOutline, airplane } from 'ionicons/icons';
+import { MenuController } from '@ionic/angular/standalone';
 
 @Component({
   selector: 'app-flight-form',
@@ -41,6 +42,7 @@ export class FlightFormPage implements OnInit {
   helicopters: Helicopter[] = [];
   pilots: Pilot[] = [];
   flightId: number | null = null;
+  private menuCtrl = inject(MenuController);
 
   constructor(
     private flightService: FlightService,
@@ -103,6 +105,10 @@ export class FlightFormPage implements OnInit {
         error: (err) => console.error('Error updating flight', err)
       });
     }
+  }
+
+  openMenu() {
+    this.menuCtrl.open();
   }
 }
 

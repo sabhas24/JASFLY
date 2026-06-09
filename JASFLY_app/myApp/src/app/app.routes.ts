@@ -42,5 +42,14 @@ export const routes: Routes = [
     path: 'flight-summary/:id',
     loadComponent: () => import('./flights/flight-summary/flight-summary.page').then(m => m.FlightSummaryPage),
     canActivate: [authGuard]
+  },
+  {
+    path: 'tabs',
+    loadComponent: () => import('./tabs/tabs.page').then( m => m.TabsPage)
+  },
+  {
+    path: 'profile',
+    loadComponent: () => import('./profile/profile.page').then( m => m.ProfilePage),
+    canActivate: [authGuard]
   }
 ];

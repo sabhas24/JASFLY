@@ -1,0 +1,182 @@
+<!-- Header igual al de flight-list -->
+<ion-header [translucent]="true">
+  <div class="custom-header">
+    <ion-button fill="clear" class="menu-btn" (click)="openMenu()">
+      <ion-icon name="menu-outline" class="menu-icon"></ion-icon>
+    </ion-button>
+    <div class="logo-container">
+      <img src="assets/jasfly.svg" alt="JASFLY" class="logo-icon" />
+    </div>
+    <div style="width: 48px;"></div>
+  </div>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <!-- Avatar y nombre -->
+  <div class="profile-hero">
+    <div class="avatar-wrapper" (click)="seleccionarFoto()">
+      <div class="avatar-circle">
+        <!-- Foto real si existe, sino ícono placeholder -->
+        <img *ngIf="pilotFoto()" [src]="pilotFoto()" class="avatar-real" />
+        <ion-icon *ngIf="!pilotFoto()" name="person-outline" class="avatar-placeholder"></ion-icon>
+      </div>
+      <div class="edit-badge">
+        <ion-icon name="pencil-outline"></ion-icon>
+      </div>
+    </div>
+
+    <!-- Input de archivo oculto — se activa al hacer clic en el avatar -->
+    <input
+      #fileInput
+      type="file"
+      accept="image/*"
+      style="display: none"
+      (change)="onFileSelected($event)"
+    />
+
+    <h2 class="pilot-name">
+      {{ piloto?.Nombre || piloto?.nombre || '' }} {{ piloto?.apellido || '' }}
+    </h2>
+    <p class="pilot-status">
+      <ion-icon name="checkmark-circle-outline" class="status-icon"></ion-icon>
+      Licencia activa
+    </p>
+  </div>
+
+  <!-- Card: Datos Personales -->
+  <div class="info-card">
+    <div class="card-title">
+      <ion-icon name="person-outline"></ion-icon>
+      <span>Datos Personales</span>
+    </div>
+    <div class="card-divider"></div>
+
+    <div class="field-group">
+      <label class="field-label">Nombre</label>
+      <div class="field-input">
+        <ion-input
+          [(ngModel)]="piloto.Nombre"
+          name="nombre"
+          placeholder="Nombre">
+        </ion-input>
+      </div>
+    </div>
+
+    <div class="field-group">
+      <label class="field-label">Apellido</label>
+      <div class="field-input">
+        <ion-input
+          [(ngModel)]="piloto.apellido"
+          name="apellido"
+          placeholder="Apellido">
+        </ion-input>
+      </div>
+    </div>
+
+    <div class="field-group">
+      <label class="field-label">Email</label>
+      <div class="field-input">
+        <ion-input
+          [(ngModel)]="email"
+          name="email"
+          type="email"
+          placeholder="correo@jasfly.com">
+        </ion-input>
+      </div>
+    </div>
+
+    <div class="field-group">
+      <label class="field-label">Teléfono</label>
+      <div class="field-input">
+        <ion-input
+          [(ngModel)]="telefono"
+          name="telefono"
+          type="tel"
+          placeholder="+54 ...">
+        </ion-input>
+      </div>
+    </div>
+  </div>
+
+  <!-- Card: Información de Licencia -->
+  <div class="info-card">
+    <div class="card-title">
+      <ion-icon name="id-card-outline"></ion-icon>
+      <span>Información de Licencia</span>
+    </div>
+    <div class="card-divider"></div>
+
+    <div class="field-group">
+      <label class="field-label">Número de Licencia</label>
+      <div class="field-input field-input--highlight">
+        <ion-icon name="shield-checkmark-outline" class="input-icon"></ion-icon>
+        <ion-input
+          [(ngModel)]="piloto.numero_licencia"
+          name="numero_licencia"
+          placeholder="ES-FCL-00000000"
+          class="bold-input">
+        </ion-input>
+      </div>
+    </div>
+
+    <div class="field-group">
+      <label class="field-label">Fecha de Vencimiento</label>
+      <div class="field-input">
+        <ion-icon name="calendar-outline" class="input-icon"></ion-icon>
+        <ion-input
+          [(ngModel)]="fechaVencimiento"
+          name="fechaVencimiento"
+          placeholder="dd/mm/aaaa">
+        </ion-input>
+      </div>
+    </div>
+
+    <div class="field-group">
+      <label class="field-label">Tipo de Aeronave</label>
+      <div class="field-input field-input--selected">
+        <ion-icon name="airplane-outline" class="input-icon input-icon--white"></ion-icon>
+        <ion-input
+          [(ngModel)]="piloto.tipo_licencia"
+          name="tipo_licencia"
+          placeholder="Tipo de aeronave"
+          class="white-input">
+        </ion-input>
+      </div>
+    </div>
+  </div>
+
+  <!-- Botón guardar -->
+  <div class="save-container">
+    <ion-button expand="block" class="save-btn" (click)="guardarPerfil()">
+      <ion-icon name="save-outline" slot="start"></ion-icon>
+      Guardar Cambios
+    </ion-button>
+  </div>
+
+</ion-content>
+
+<!-- Tab bar — Perfil activo -->
+<ion-tab-bar slot="bottom" class="custom-tab-bar">
+  <ion-tab-button class="tab-btn" routerLink="/flight-list">
+    <ion-icon name="airplane-outline"></ion-icon>
+    <ion-label>Vuelos</ion-label>
+  </ion-tab-button>
+
+  <ion-tab-button class="tab-btn">
+    <ion-icon name="sunny-outline"></ion-icon>
+    <ion-label>Clima</ion-label>
+  </ion-tab-button>
+
+  <ion-tab-button class="tab-btn">
+    <ion-icon name="warning-outline"></ion-icon>
+    <ion-label>Reportes</ion-label>
+  </ion-tab-button>
+
+  <ion-tab-button class="tab-btn tab-active">
+    <div class="tab-pill">
+      <ion-icon name="person-outline"></ion-icon>
+      <ion-label>Perfil</ion-label>
+    </div>
+  </ion-tab-button>
+</ion-tab-bar>

@@ -1,20 +1,37 @@
 <ion-content class="ion-padding login-bg">
   <div class="login-container">
-    <img src="assets/helicopter.svg" alt="JASFLY" class="login-logo" />
-    <h1 class="login-title">JASFLY S.A.</h1>
+    <img src="assets/jasfly.svg" alt="JASFLY" class="login-logo" />
     <p class="login-subtitle">Identifíquese para continuar</p>
 
     <div class="login-card">
       <span class="select-label">Seleccione Piloto:</span>
-      <ion-item lines="none">
-        <ion-select [(ngModel)]="selectedPilotId" interface="popover" placeholder="Toque aquí para elegir">
+      <ion-item lines="none" class="input-item">
+        <ion-select [(ngModel)]="selectedPilotId" interface="popover" placeholder="Toque aquí para elegir"
+          (ionChange)="verificarBiometriaDisponible()">
           <ion-select-option *ngFor="let pilot of pilots" [value]="pilot.id">
-            Cpt. {{ pilot.Nombre || pilot.nombre }} {{ pilot.apellido }}
+            Cpt. {{ pilot.Nombre || pilot.nombre }} {{ pilot.apellido }} ({{ pilot.numero_licencia }})
           </ion-select-option>
         </ion-select>
       </ion-item>
+
+      <span class="select-label" *ngIf="selectedPilotId">Ingrese Contraseña:</span>
+      <ion-item lines="none" class="input-item" *ngIf="selectedPilotId">
+        <ion-input type="password" [(ngModel)]="password" placeholder="••••••••" class="password-input">
+        </ion-input>
+      </ion-item>
     </div>
 
-    <ion-button class="login-btn" expand="block" (click)="ingresar()">INGRESAR</ion-button>
+    <!-- Fila de Botones: Ingresar tradicional y Botón de Huella -->
+    <div class="button-group">
+      <ion-button class="login-btn" expand="block" (click)="ingresar()">
+        INGRESAR
+      </ion-button>
+
+      <!-- Botón de Huella Dactilar (visible solo si el piloto ya activó biometría en este dispositivo) -->
+      <ion-button *ngIf="biometriaActivadaParaPiloto" fill="clear" class="fingerprint-btn"
+        (click)="autenticarConHuella()">
+        <ion-icon name="finger-print-outline"></ion-icon>
+      </ion-button>
+    </div>
   </div>
 </ion-content>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonLabel, IonButton, IonIcon, IonBackButton, IonButtons } from '@ionic/angular/standalone';
@@ -9,6 +9,7 @@ import { Pilot } from '../../interfaces/pilot';
 import { ActivatedRoute, Router } from '@angular/router';
 import { addIcons } from 'ionicons';
 import { chevronBackOutline, airplane } from 'ionicons/icons';
+import { MenuController } from '@ionic/angular/standalone';
 
 @Component({
   selector: 'app-flight-summary',
@@ -26,6 +27,7 @@ export class FlightSummaryPage implements OnInit {
   helicopters: Helicopter[] = [];
   pilots: Pilot[] = [];
   flightId: number | null = null;
+  private menuCtrl = inject(MenuController);
 
   constructor(
     private flightService: FlightService,
@@ -92,5 +94,9 @@ export class FlightSummaryPage implements OnInit {
 
   confirmar() {
     this.router.navigate(['/flight-list']);
+  }
+
+  openMenu() {
+    this.menuCtrl.open();
   }
 }

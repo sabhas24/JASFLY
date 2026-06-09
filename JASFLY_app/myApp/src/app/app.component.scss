@@ -1,0 +1,63 @@
+// Custom Menu Styles
+.custom-menu {
+  --width: 280px;
+
+  .menu-header {
+    background: linear-gradient(135deg, #0055a4 0%, #003366 100%);
+    padding: calc(var(--ion-safe-area-top, 20px) + 15px) 20px 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: auto;
+
+    .logo-container {
+      margin-bottom: 8px;
+
+      .menu-logo {
+        width: 130px;
+        max-width: 100%;
+        height: auto;
+      }
+    }
+
+    .menu-subtitle {
+      margin: 0;
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      font-weight: 600;
+    }
+  }
+
+  .menu-content {
+    --background: #f8fafc;
+  }
+
+  ion-list {
+    background: transparent;
+    padding: 10px 0;
+  }
+
+  ion-item {
+    --background: transparent;
+    --background-hover: rgba(0, 85, 164, 0.05);
+    --background-activated: rgba(0, 85, 164, 0.1);
+    --color: #334455;
+    --padding-start: 20px;
+    --min-height: 54px;
+    margin: 4px 10px;
+    border-radius: 10px;
+    font-weight: 500;
+
+    ion-icon {
+      color: #6688aa;
+      font-size: 1.3rem;
+      margin-right: 15px;
+    }
+
+    &.item-interactive {
+      transition: all 0.2s ease;
+    }
+  }
+}

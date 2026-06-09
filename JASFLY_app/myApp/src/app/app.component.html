@@ -1,3 +1,36 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+  <ion-menu contentId="main-content" type="overlay" class="custom-menu">
+    <ion-header class="ion-no-border">
+      <div class="menu-header">
+        <div class="logo-container">
+          <img src="assets/jasfly.svg" alt="JASFLY" class="menu-logo" />
+        </div>
+        <p class="menu-subtitle">Navegación</p>
+      </div>
+    </ion-header>
+    <ion-content class="menu-content">
+      <ion-list>
+        <ion-menu-toggle auto-hide="false">
+          <ion-item routerLink="/flight-list" routerDirection="root" lines="none" detail="false" button>
+            <ion-icon slot="start" name="airplane-outline" color="primary"></ion-icon>
+            <ion-label>Vuelos</ion-label>
+          </ion-item>
+          <ion-item button (click)="mockAction('Reportes')" lines="none" detail="false">
+            <ion-icon slot="start" name="document-text-outline" color="primary"></ion-icon>
+            <ion-label>Reportes</ion-label>
+          </ion-item>
+          <ion-item button (click)="mockAction('Perfil')" lines="none" detail="false">
+            <ion-icon slot="start" name="person-outline" color="primary"></ion-icon>
+            <ion-label>Perfil</ion-label>
+          </ion-item>
+          <ion-item button (click)="mockAction('Clima')" lines="none" detail="false">
+            <ion-icon slot="start" name="partly-sunny-outline" color="primary"></ion-icon>
+            <ion-label>Clima</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+
+  <ion-router-outlet id="main-content"></ion-router-outlet>
 </ion-app>
