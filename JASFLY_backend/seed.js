@@ -35,10 +35,10 @@ async function runSeed() {
 
     // 1. Crear Pilotos
     const pilotos = await Piloto.bulkCreate([
-      { Nombre: 'Juan', apellido: 'Pérez', tipo_licencia: 'PPL', numero_licencia: 123456 },
-      { Nombre: 'María', apellido: 'García', tipo_licencia: 'CPL', numero_licencia: 789012 },
-      { Nombre: 'Carlos', apellido: 'Sánchez', tipo_licencia: 'ATPL', numero_licencia: 345678 }
-    ], { returning: true });
+      { Nombre: 'Juan', apellido: 'Pérez', tipo_licencia: 'PPL', numero_licencia: 123456, contrasena: '123456' },
+      { Nombre: 'María', apellido: 'García', tipo_licencia: 'CPL', numero_licencia: 789012, contrasena: '123456' },
+      { Nombre: 'Carlos', apellido: 'Sánchez', tipo_licencia: 'ATPL', numero_licencia: 345678, contrasena: '123456' }
+    ], { returning: true, individualHooks: true });
 
     // 2. Crear Helicópteros
     const helis = await Helicoptero.bulkCreate([

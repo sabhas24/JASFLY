@@ -1,5 +1,6 @@
 import { DataTypes } from "sequelize";
 import sequelize from "../db/connect.js";
+import bcrypt from "bcrypt";
 
 export const Piloto = sequelize.define(
     "Piloto", {
@@ -34,8 +35,34 @@ export const Piloto = sequelize.define(
         type: DataTypes.INTEGER,
         allowNull: false,
         unique: true,
+    },
+    contrasena: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+            notEmpty: true,
+        }
+    },
+    foto: {
+        type: DataTypes.TEXT,
+        allowNull: true,
+
     }
 }, {
     timestamps: true,
+    hooks: {
+
+        beforeCreate: async (user) => {
+            const salt = await bcrypt.genSalt(10);
+            user.contrasena = await bcrypt.hash(user.contrasena, salt);
+        },
+        beforeUpdate: async (user) => {
+            if (user.changed('contrasena')) {
+                const salt = await bcrypt.genSalt(10);
+
+                user.contrasena = await bcrypt.hash(user.contrasena, salt);
+            }
+        }
+    }
 });
 export default Piloto;
